@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+{% load static%}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="main-content">
+    <section class="section">
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Tabel Akta Masuk</h3>
+                        </div>
+                        <div class="card-header">
+                            <form method="get">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6>Nomor Akta</h6>
+                                        {{filter_akta.form.nomor_akta|add_class:"form-control"}}
+                                    </div>
+                                    <div class="col mt-4">
+                                        <button class="btn btn-primary" type="submit">Cari</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                        <div align="center">
+                            <a href="{% url 'export'%}" class="btn btn-success"><i class="fa fa-edit"></i>Cetak Laporan</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="mainTable" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2">NO URUT</th>
+                                            <th>NOMOR</th>
+                                            <th>TANGGAL</th>
+                                            <th rowspan="2">BENTUK PEMBUATAN HUKUM</th>
+                                            <th>PIHAK YANG MENGALIHKAN</th>
+                                            <th>PIHAK YANG MENERIMA</th>
+                                            <th rowspan="2">JENIS DAN NOMOR HAK</th>
+                                            <th rowspan="2">LETAK TANAK DAN BANGUNAN</th>
+                                            <th>TNH</th>
+                                            <th>BGN</th>
+                                            <th rowspan="2">HARGA TRANSAKSI PEROLEHAN PENGALIHAN HAK
+                                                (Rp)</th>
+                                            <th>NOP/TAHUN</th>
+                                            <th>NJOP/(Rp)</th>
+                                            <th>TANGGAL</th>
+                                            <th>(Rp)</th>
+                                            <th>TANGGAL</th>
+                                            <th>(Rp)</th>
+                                            <th rowspan="2">KETERANGAN</th>
+                                            <th rowspan="2">AKSI</th>
+                                        </tr>
+                                        <tr align="center">
+                                            <th colspan="2">AKTA</th>
+                                            <th colspan="2">NAMA, ALAMAT DAN NPWP</th>
+                                            <th colspan="2">LUAS (M2)</th>
+                                            <th colspan="2">SPPT PBB</th>
+                                            <th colspan="2">SSP</th>
+                                            <th colspan="2">SBB</th>
+                                        </tr>
+                                        <tr>
+                                            <td align="center">1</td>
+                                            <td align="center">2</td>
+                                            <td align="center">3</td>
+                                            <td align="center">4</td>
+                                            <td align="center">5</td>
+                                            <td align="center">6</td>
+                                            <td align="center">7</td>
+                                            <td align="center">8</td>
+                                            <td align="center">9</td>
+                                            <td align="center">10</td>
+                                            <td align="center">11</td>
+                                            <td align="center">12</td>
+                                            <td align="center">13</td>
+                                            <td align="center">14</td>
+                                            <td align="center">15</td>
+                                            <td align="center">16</td>
+                                            <td align="center">17</td>
+                                            <td align="center">18</td>
+                                            <td align="center">19</td>
+                                
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for dataakta in page_akta.object_list %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ dataakta.nomor_akta }}</td>
+                                            <td>{{ dataakta.tgl_akta }}</td>
+                                            <td>{{ dataakta.jenis }}</td>
+                                            <td>{% for pkm in dataakta.get_akta %}
+                                                    {{pkm.nama_pertama}} {{pkm.alamat_pertama}} RT/RW {{pkm.rt_pertama}}/{{pkm.rw_pertama}} {{pkm.desa_pertama}} Kec. {{pkm.kec_pertama}}
+                                                {% endfor %}
+                                            </td>
+                                            <td>{% for pkd in dataakta.get_akta2 %}
+                                                    {{pkd.nama_kedua}} {{pkd.alamat_kedua}} RT/RW {{pkd.rt_kedua}}/{{pkd.rw_kedua}} {{pkd.desa_kedua}} Kec. {{pkd.kec_kedua}}
+                                                {% endfor %}</td>
+                                            <td>{{ dataakta.nomor_hak }}</td>
+                                            <td>{{ dataakta.almt_aset }}</td>
+                                            <td>{{ dataakta.luas_tanah }}</td>
+                                            <td>{{ dataakta.luas_bgn }}</td>
+                                            <td>{{ dataakta.harga_pengalihan }}</td>
+                                            <td>{{ dataakta.nop }}</td>
+                                            <td>{{ dataakta.njop }}</td>
+                                            <td>{{ dataakta.tgl_ssp }}</td>
+                                            <td>{{ dataakta.harga_ssp }}</td>
+                                            <td>{{ dataakta.tgl_sbb }}</td>
+                                            <td>{{ dataakta.harga_sbb }}</td>
+                                            <td>{{ dataakta.keterangan }}</td>
+                                            <td>
+                                                <div class="btn-group mb-3" role="group" aria-label="Basic example">
+                                                    <a href="{% url 'updateakta' dataakta.id%}">
+                                                        <button class="btn btn-success" type="submit">Edit</i></button></i>
+                                                    </a>
+                                                    
+                                                    
+                                                    {% if dataakta.jenis == 'AJB' %}
+                                                    <a href="{% url 'renderpdf' dataakta.id%}">
+                                                        <button class="btn btn-info" type="submit">Cetak</button>
+                                                    </a>
+
+
+                                                    {% elif dataakta.jenis == 'APHB' %}
+                                                    <a href="{% url 'render_pdf_aphb' dataakta.id%}">
+                                                        <button class="btn btn-info" type="submit">Cetak</button>
+                                                    </a>
+
+                                                    {% elif dataakta.jenis == 'SKMHT' %}
+                                                    <a href="{% url 'render_pdf_skmht' dataakta.id%}">
+                                                        <button class="btn btn-info" type="submit">Cetak</button>
+                                                    </a>
+
+                                                    {% elif dataakta.jenis == 'APHT' %}
+                                                    <a href="{% url 'render_pdf_apht' dataakta.id%}">
+                                                        <button class="btn btn-info" type="submit">Cetak</button>
+                                                    </a>
+
+                                                    {% else %}
+                                                    <a href="{% url 'render_pdf_ah' dataakta.id%}">
+                                                        <button class="btn btn-info" type="submit">Cetak</button>
+                                                    </a>
+                                                    {% endif %}
+
+                                                </div>
+
+
+
+
+                                            </td>
+
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <br>
+                            <nav>
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item {% if not previous %} disabled {% endif %}">
+                                        <a class="page-link" href="{{ previous }}">Previous</a>
+                                    </li>
+
+                                    {% for n in page_akta.paginator.page_range %}
+                                    {% if page_akta.number == n %}
+                                    <li class="page-item active" aria>
+                                        <span class="page-link">
+                                            {{ n }}
+                                            <span class="sr-only">(current)</span>
+                                        </span>
+                                    </li>
+                                    {% elif n > page_akta.number|add:-3 and n < page_akta.number|add:3 %} <li
+                                        class="page-item"><a class="page-link" href="?halaman={{ n }}">{{ n }}</a></li>
+                                        {% endif %}
+                                        {% endfor %}
+                                        <li class="page-item {% if not next %} disabled {% endif %}">
+                                            <a class="page-link" href="{{ next }}">Next</a>
+                                        </li>
+
+                                </ul>
+
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+{% endblock content%}

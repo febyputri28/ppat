@@ -1,0 +1,75 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- auth-login.html  21 Nov 2019 03:49:32 GMT -->
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>{{menu}}</title>
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="{%static 'public/assets/css/app.min.css'%}">
+  <link rel="stylesheet" href="{%static 'public/assets/bundles/bootstrap-social/bootstrap-social.css'%}">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{%static 'public/assets/css/style.css'%}">
+  <link rel="stylesheet" href="{%static 'public/assets/css/components.css'%}">
+  <!-- Custom style CSS -->
+  <link rel="stylesheet" href="{%static 'public/assets/css/custom.css'%}">
+</head>
+
+<body>
+  <div class="loader"></div>
+  <div id="app">
+    <section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 align="center">Notaris dan PPAT Yoan Budiyanto, S.H.,M.Kn.</h3>
+              </div>
+              <div class="card-body">
+                <h5 align="center">Halaman Login</h5>
+                  {% if messages %}
+                  {% for pesan in messages %}
+                  <div class="alert alert{{ pesan.tags }}" align="center"><b>{{ pesan }}</b></div>
+                  {% endfor %}
+                  {% endif %}
+                  <form action="{% url 'login'%}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label class="small mb-1">Nama Pengguna</label>
+                      <input class="form-control py-4" name="username" type="text" placeholder="Masukkan Nama Pengguna" />
+                    </div>
+                    <div class="form-group">
+                      <label class="small mb-1">Kata Sandi</label>
+                      <input class="form-control py-4" name="password" type="password" placeholder="Masukkan Kata Sandi" />
+                    </div>
+                    <div align="center">
+                      <button class="btn btn-primary float-end text-white" type="submit">Masuk</button>
+                    </div>
+                  </form>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- General JS Scripts -->
+  <script src="{%static 'public/assets/js/app.min.js'%}"></script>
+  <!-- JS Libraies -->
+  <!-- Page Specific JS File -->
+  <!-- Template JS File -->
+  <script src="{%static 'public/assets/js/scripts.js'%}"></script>
+  <!-- Custom JS File -->
+  <script src="{%static 'public/assets/js/custom.js'%}"></script>
+</body>
+
+
+<!-- auth-login.html  21 Nov 2019 03:49:32 GMT -->
+</html>
+

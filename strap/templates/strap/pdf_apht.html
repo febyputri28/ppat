@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>PDF</title>
+    <style>
+        #atas {
+            padding-left: 50px;
+            padding-right: 30px;
+
+        }
+
+        #kotak {
+            padding-left: 120px;
+            padding-right: 60px;
+
+
+        }
+
+        #pertama {
+            padding-left: 140px;
+            padding-right: 60px;
+        }
+
+        #ttd {
+
+            padding-left: 100px;
+            padding-right: 60px;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <center>
+        <p id="kotak">
+            <font size="7"><b>PEJABAT PEMBUAT AKTA TANAH</b></font>
+        </p>
+        <p id="kotak">
+            <font size="7"><b>(PPAT)</b></font>
+        </p>
+        <p id="kotak">
+            <font size="7"><b>YOAN BUDIYANTO, S.H, M.Kn.</b></font>
+        </p>
+        <p id="kotak">
+            <font size="6">DAERAH KERJA KABUPATEN PROBOLINGGO</font>
+        </p>
+        <p id="kotak">
+            <font size="6">SK. Kepala Badan Pertanahan Nasional Republik Indonesia</font>
+        </p>
+        <p id="kotak">
+            <font size="6">Nomor 223/KEP-17.3/X/2014, Tanggal 17 Oktober 2014</font>
+        </p>
+        <p id="kotak">
+            <font size="6">Jalan Raya Surabaya – Situbondo KM 134, Telp. 0335-771781</font>
+        </p>
+        <p id="kotak">
+            <font size="6">PAITON – PROBOLINGGO Jawa Timur (67291) </font>
+        </p><br>
+        <p id="kotak">
+            <font size="6"><b>AKTA PEMBERIAN HAK TANGGUNGAN</b></font>
+        </p>
+        <p id="kotak">
+            <font size="6"><b>Nomor : {{buatakta.nomor_akta}} </b>
+        </p><br>
+
+    </center>
+    <p id="kotak" align="justify">
+        <font size="6">Hadir dihadapan saya, <b>YOAN BUDIYANTO, Sarjana Hukum, Magister Kenotariatan,</b> yang
+            berdasarkan Surat Keputusan
+            Kepala Badan Pertanahan Nasional Republik Indonesia Tanggal 17 Oktober 2014 Nomor 223/KEP-17.3/X/2014,
+            diangkat sebagai Pejabat Pembuat Akta Tanah, yang selanjutnya disebut PPAT, yang dimaksud dalam Pasal 7
+            Peraturan Pemerintah Nomor 24 Tahun 1997 tentang Pendaftaran Tanah, dengan daerah kerja Kabupaten
+            Probolinggo dan berkantor di Jalan Surabaya - Situbondo KM 134 Paiton Probolinggo, dengan dihadiri oleh
+            saksi-saksi yang Saya kenal dan akan disebut pada bagian akhir akta ini :
+            -----------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6"> {% for pkm in buatakta.get_akta %}
+            <b>{{pkm.nama_pertama}}</b>, lahir di {{pkm.tempat_lahir_pertama}}, pada tanggal
+            {{pkm.tanggal_lahir_pertama}}
+            ({{pkm.uraian_tl_pertama}}), {{pkm.status_kewarganegaraan_pertama}}, Pekerjaan {{pkm.pekerjaan_pertama}},
+            bertempat tinggal di
+             {{pkm.kab_pertama}}, {{pkm.alamat_pertama}}, Rukun Tetangga {{pkm.rt_pertama}}, Rukun Warga
+            {{pkm.rw_pertama}}, {{pkm.desa_pertama}},
+            Kecamatan {{pkm.kec_pertama}}, Pemegang Kartu Tanda Penduduk Provinsi {{pkm.prov_pertama}} 
+            {{pkm.kab_pertama}} Nomor :
+            {{pkm.nik_pertama}}. <br><br>
+            {% endfor %}
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">yang untuk melakukan tindakan hukum dalam akta ini telah mendapat ijin/persetujuan dari
+            {{buatakta.status_saksi}}nya,
+            yaitu :
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6"><b>{{buatakta.nama_saksi}}</b>, lahir di {{buatakta.tempat_lahir_saksi}}, pada tanggal
+            {{buatakta.tanggal_lahir_saksi}} ({{buatakta.uraian_tl_saksi}}), {{buatakta.status_kewarganegaraan_saksi}},
+            Pekerjaan
+            {{buatakta.pekerjaan_saksi}}, bertempat
+            tinggal di  {{buatakta.kab_saksi}}, {{buatakta.alamat_saksi}}, Rukun Tetangga
+            {{buatakta.rt_saksi}}, Rukun Warga {{buatakta.rw_saksi}}, {{buatakta.desa_saksi}}
+            , Kecamatan {{buatakta.kec_saksi}}, Pemegang Kartu Tanda Penduduk Provinsi {{buatakta.prov_saksi}} 
+            {{buatakta.kab_saksi}} Nomor :
+            {{buatakta.nik_saksi}}.
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">selanjutnya disebut Pihak Kedua. ----------------------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">{% for pkd in buatakta.get_akta2 %}
+            <b>{{pkd.nama_kedua}}</b>, lahir di {{pkd.tempat_lahir_kedua}}, pada tanggal {{pkd.tanggal_lahir_kedua}}
+            ({{pkd.uraian_tl_kedua}}), {{pkd.status_kewarganegaraan_kedua}}, Pekerjaan {{pkd.pekerjaan_kedua}},
+            bertempat
+            tinggal di
+             {{pkd.kab_kedua}}, {{pkd.alamat_kedua}}, Rukun Tetangga {{pkd.rt_kedua}}, Rukun Warga
+            {{pkd.rw_kedua}}, {{pkd.desa_kedua}},
+            Kecamatan {{pkd.kec_kedua}}, Pemegang Kartu Tanda Penduduk Provinsi {{pkd.prov_kedua}} 
+            {{pkd.kab_kedua}} Nomor :
+            {{pkd.nik_kedua}}.<br><br>
+            {% endfor %}
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">
+            Para Pihak menerangkan : ------------------------------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6"> Bahwa oleh Pihak Pertama, yang dalam
+            melakukan tindakannya yang dimaksud telah
+            memperoleh persetujuan dari {{buatakta.status_saksi}}nya,yaitu
+            <b>{{buatakta.nama_saksi}}</b>, {{buatakta.pekerjaan_saksi}}, bertempat tinggal di 
+            {{buatakta.kab_saksi}}, {{buatakta.alamat_saksi}}, Rukun Tetangga {{buatakta.rt_saksi}}, Rukun Warga
+            {{buatakta.rt_saksi}}, {{buatakta.desa_saksi}}, Kecamatan {{buatakta.kec_saksi}};
+            keduanya bersama-sama bertanggung jawab secara tanggung renteng;
+            selaku Debitor, telah dibuat dan ditanda tangani perjanjian
+            utang piutang yang dibuktikan dengan :
+            
+    </p>
+
+    <p id="kotak" align="justify">
+        <font size="6">
+            Surat {{buatakta.jenis_bukti_perjanjian}}, Nomor : {{buatakta.no_perjanjian}}
+            , tanggal {{buatakta.tanggal_perjanjian}}, dibuat dibawah tangan, bermaterai cukup, dan telah
+            dilegalisasi oleh - dan dihadapan Saya, Notaris di Kabupaten Probolinggo, dibawah nomor :
+            {{buatakta.no_bukti_ppat}}.
+
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Bahwa untuk menjamin pelunasan utang
+            {% for pkm in buatakta.get_akta %}
+            <b>{{pkm.nama_pertama}}</b>
+            {% endfor %}
+            tersebut. Selaku
+            Debitor, sejumlah Rp. {{buatakta.jumlah_perjanjian}}/sejumlah uang yang dapat ditentukan di
+            kemudian hari berdasarkan perjanjian utang piutang tersebut diatas dan penambahan, perubahan,
+            perpanjangan serta pembaruannya (selanjutnya disebut perjanjian utang piutang) sampai sejumlah
+            Nilai Tanggungan Peringkat I (Pertama) sebesar Rp. 100.000.000,- (seratus juta rupiah), oleh Pihak
+            Pertama diberikan dengan akta ini kepada dan untuk kepentingan Pihak Kedua, yang dengan ini
+            peraturan pelaksanaannya Peringkat Pertama (I) atas objek berupa 1 (satu) hak atas tanah/Hak
+            Milik yang diuraikan dibawah ini :
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Hak Milik : Nomor {{buatakta.nomor_hak}} atas sebidang tanah seluas {{buatakta.luas_tanah}} m2
+            dengan
+            Nomor Identifikasi Bidang Tanah (NIB) : {{buatakta.nib}} </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">terletak di : ----------------------------------------------------------------------------<br>
+            <font size="6">Provinsi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                {{buatakta.prov_tanah}}<br>
+                <font size="6">Kabupaten &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{buatakta.kab_tanah}}<br>
+                    <font size="6">Kecamatan &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{buatakta.kec_tanah}}<br>
+                        <font size="6">Desa
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                            {{buatakta.desa_tanah}}<br>
+    </p>
+
+    <p id="kotak" align="justify">
+        <font size="6">Sertifikat dan bukti pemilikan yang disebutkan diatas diserahkan kepada saya, PPAT,
+            untuk keperluan pendaftaran hak, pendaftaran peralihan hak dan pendaftaran Hak Tanggungan yang
+            diberikan dengan akta ini; ---------------------------------------------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Pemberian Hak Tanggungan tersebut diatas meliputi juga : Segala sesuatu yang berdiri, tumbuh
+            dan tertanam diatas tanah tersebut yang karena sifat, maksud dan peruntuknya menurut hukum dapat dianggap
+            sebagai benda tetap. -------------------------------------------------
+    </p>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Untuk selanjutnya hak atas tanah dan benda-benda lain yang tersebut diatas disebut sebagai Obyek
+            Hak Tanggungan yang oleh Pihak Pertama dinyatakan sebagai miliknya. -------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Para pihak, dalam kedudukannya sebagaimana tersebut di atas menerangkan, bahwa pemberian Hak
+            Tanggungan tersebut disetujui dan diperjanjikan dengan ketentuan-ketentuan sebagai berikut:
+            --------------------------------------------------------------------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">---------------------------------------- Pasal 1 ----------------------------------------</font>
+    </p>
+
+    <p id="kotak" align="justify">
+        <font size="6"> Pihak pertama menjamin bahwa semua objek Hak Tanggungan tersebut di atas, betul milik Pihak
+            Pertama, tidak tersangkut dalam
+            suatu sengketa, bebas dari sitaan dan bebas pula dari beban beban apapun yang tidak tercatat.
+            ------------------------------------------------------
+
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">---------------------------------------- Pasal 2 ----------------------------------------</font>
+    </p>
+
+
+    <p id="kotak" align="justify">
+        <font size="6">Hak Tanggungan tersebut di atas diberikan oleh Pihak Pertama dan diterima oleh Pihak Kedua dengan
+            janji-janji yang disepakati oleh kedua belah pihak sebagaimana diuraikan di bawah ini :-----------------
+        </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">• Pihak Pertama tidak akan menyewakan kepada pihak lain objek Hak Tanggungan tanpa persetujuan
+            tertulis terlebih dahulu dari Pihak Kedua, termasuk menentukan atau mengubah jangka waktu sewa dan/atau
+            menerima uang sewa dimuka jika disetujui disewakan atau sudah disewakan;
+            ------------------------------------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">• Pihak Pertama tidak akan mengubah atau merombak semua bentuk atau tata susunan Objek Hak
+            Tanggungan, termasuk mengubah sifat dan tujuan kegunaanya baik seluruhnya maupun sebagaian tanpa persetujuan
+            tertulis terlebih dahulu dari Pihak Kedua ;
+            --------------------------------------------------------------------------------
+    </p>
+
+    <p id="kotak" align="justify">
+        <font size="6">• Dalam hal Debitor sungguh-sungguh cidera janji, Pihak Kedua oleh Pihak Pertama dengan akta ini
+            diberi dan menyatakan menerima kewenangan. dan untuk itu kuasa, untuk mengelola objek Hak Tanggungan
+            berdasarkan Penetapan Pengadilan Negeri yang daerah hukumnya meliputi letak objek Hak Tanggungan yang
+            bersangkutan; ------------------------------------------------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">• Jika Debitor tidak memenuhi kewajiban untuk melunasi utangnya berdasarkan perjanjian
+            utang-piutang tersebut diatas, oleh Pihak Pertama, Pihak Kedua selaku Pemegang Hak Tanggungan Peringkat
+            Pertama dengan akta ini diberi dan menyatakan menerima kewenangan, dan untuk itu kuasa, untuk tanpa
+            persetujuan terlebih dahulu dari Pihak Pertama;-------------------------------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">a. menjual atau suruh menjual dihadapan umum secara lelang Objek Hak Tanggungan baik seluruhnya
+            maupun sebagian-sebagian; ------
+        </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">b. mengatur dan menetapkan waktu, tempat, cara dan syarat-syarat penjualan ;
+            ---------------------------------------------------------------------------
+
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">c. menerima uang penjualan, menandatangani dan menyerahkan kwitansi ;
+            ------------------------------------------------------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">d. menyerahkan apa yang dijual itu kepada pembeli yang bersangkutan ;
+            ----------------------------------------------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">e. mengambil dari uang hasil penjualan itu seluruhnya atau sebagian untuk melunasi utang
+            Debitor
+            tersebut diatas; dan melakukan hal-hal lain yang menurut undang-undang dan peraturan hukum yang
+            berlaku
+            diharuskan atau menurut pendapat Pihak Kedua perlu dilakukan dalam rangka melaksanakan kuasa
+            tersebut;
+            -----------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">• Pihak Kedua sebagai Pemegang Hak Tanggungan Pertama atas Objek Hak Tanggungan tidak
+            akan
+            membersihkan Hak Tanggungan tersebut kecuali dengan persetujuan dari Pemegang Hak Tanggungan Kedua
+            dan
+            seterusnya, walaupun sudah dieksekusi untuk pelunasan piutang Pemegang Hak Tanggungan Pertama ;
+            ----
+
+        </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">• Tanpa persetujuan tertulis terlebih dahulu dari Pihak Kedua, Pihak Pertama tidak akan
+            melepaskan haknya atas Objek Hak Tanggungan atau mengalihkannya secara apapun untuk kepentingan
+            Pihak Ketiga
+            ; ------------------------------------------------------
+
+        </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">• Dalam hal Objek Hak Tanggungan dilepaskan haknya oleh Pihak Pertama atau dicabut haknya
+            untuk
+            kepentingan umum, sehingga hak Pihak Pertama atas Objek Hak Tanggungan berakhir, Pihak Kedua dengan
+            akta ini
+            oleh Pihak Pertama diberi dan menyatakan menerima kewenangan, dan untuk itu kuasa, untuk menuntut
+            atau
+            menagih dan menerima uang ganti rugi dan/atau segala sesuatu yang karena itu dapat ditagih dari
+            Pemerintah
+            dan/atau Pihak Ketiga lainnya, untuk itu menandatangani dan menyerahkan tanda penerimaan uang dan
+            melakukan
+            tindakan-tindakan yang perlu dan berguna serta dipandang baik oleh Pihak Kedua serta selanjutnya
+            mengambil
+            seluruh atau sebagian uang ganti rugi dan lain-lainnya tersebut guna pelunasan piutangnya ;
+            --------------------------------------
+
+        </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">• Pihak Pertama akan mengasuransikan Objek Hak Tanggungan terhadap
+            bahaya-bahaya
+            kebakaran dan malapetaka lain yang dianggap perlu oleh Pihak Kedua dengan syarat-syarat
+            untuk
+            suatu jumlah pertanggungan yang dipandang cukup oleh Pihak Kedua pada perusahaan asuransi
+            yang
+            ditunjuk oleh Pihak Kedua, dengan ketentuan surat polis asuransi yang bersangkutan akan disimpan
+            oleh Pihak
+            Kedua dan Pihak Pertama akan membayar premi pada waktu dan sebagaimana mestinya ; Dalam hal
+            terjadi
+            kerugian karena kebakaran atau malapetaka lain atas Objek Hak Tanggungan Pihak
+            Kedua
+            dengan akta ini diberi dan menyatakan menerima kewenangan, dan untuk itu kuasa, untuk
+            menerima
+            seluruh atau sebagian uang ganti kerugian asuransi yang bersangkutan sebagai pelunasan utang Debitor
+            ; --------------------------------------------------------
+
+        </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">• Pihak Kedua dengan akta ini diberi dan menyatakan menerima kewenangan, dan untuk itu
+            kuasa,
+            untuk, atas biaya Pihak Pertama, melakukan tindakan yang diperlukan untuk menjaga dan mempertahankan
+            serta
+            menyelamatkan Objek Hak Tanggungan jika hal itu diperlukan untuk pelaksanaan eksekusi
+            atau untuk mencegah menjadi hapusnya atau dibatalkannya hak atas Objek Hak Tanggungan karena tidak
+            dipenuhinya atau dilanggarnya ketentuan Undang-undang serta jika diperlukan mengurus perpanjangan
+            jangka
+            waktu dan pembaruan hak atas tanah yang menjadi Objek Hak Tanggungan;
+            -------------------------------------------------------------------
+
+        </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">• Jika Pihak Kedua mempergunakan kekuasaanya untuk menjual Objek Hak Tanggungan, Pihak
+            Pertama akan memberikan kesempatan kepada yang berkepentingan untuk 
+            melihat Objek Hak Tanggungan yang bersangkutan pada waktu yang ditentukan oleh Pihak Kedua
+            dan
+            segera mengosongkan atau suruh menggosongkan dan menyerahkan objek Hak Tanggungan
+            tersebut
+            kepada Pihak Kedua atau 
+            pihak yang ditunjuk oleh Pihak Kedua agar selanjutnya dapat menggunakan dalam arti kata yang
+            seluas-luasnya
+            ; ---------------------------------------------------------------------
+
+
+        </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">• Sertifikat tanda bukti hak atas tanah yang menjadi objek Hak Tanggungan akan diserahkan
+            oleh
+            Pihak Pertama kepada Pihak Kedua untuk disimpan dan dipergunakan oleh Pihak Kedua dalam melaksanakan
+            hak-haknya sebagai pemegang Hak Tanggungan dan untuk itu Pihak Pertama dengan akta ini
+            memberikan kuasa kepada Pihak Kedua untuk menerima sertifikat tersebut dari Kantor
+            Pertanahan
+            setelah Hak Tanggungan ini didaftar ; ------------------------
+
+        </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">---------------------------------------- Pasal 3 ----------------------------------------
+        </font>
+    </p>
+
+    <p id="kotak" align="justify">
+        <font size="6">Untuk melaksanakan janji-janji dan ketentuan-ketentuan sebagaimana diuraikan
+            dalam
+            pasal 2, Pihak Pertama dengan akta ini memberi kuasa kepada Pihak Kedua, yang menyatakan 
+            menerima
+            untuk menghadap di hadapan pejabat-pejabat pada instansi yang berwenang, memberikan
+            keterangan,
+            menandatangani formulir/ surat, menerima segala Surat berharga dan lain Surat
+            serta
+            membayar semua biaya dan menerima segala uang pembayaran serta melakukan segala tindakan yang perlu
+            dan
+            berguna untuk melaksanakan janji-janji dan ketentuan-ketentuan tersebut.
+            ------------
+
+        </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">---------------------------------------- Pasal 4 ----------------------------------------
+        </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Para pihak dalam hal-hal mengenai Hak Tanggungan tersebut di atas dengan segala akibatnya
+            memilih
+            domisili pada Kantor Pengadilan Negeri di Kabupaten Probolinggo atau Kantor 
+            Pengadilan Negeri dimana tempat tanah Obyek Hak Tanggungan terletak.
+            --------------------------------------------------------------------------------</font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">---------------------------------------- Pasal 5 ----------------------------------------
+        </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Biaya pembuatan akta ini, uang saksi dan segala biaya mengenai pembebanan Hak Tanggungan
+            tersebut
+            di atas dibayar oleh DEBITOR.
+            ----------------------------------------------------------------------------
+        </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Para pihak menyatakan dengan ini menjamin akan kebenaran
+            identitas para pihak sesuai tanda pengenal yang disampaikan kepada saya, Pejabat dan
+            bertanggung jawab
+            sepenuhnya atas hal tersebut, serta selanjutnya para pihak juga menyatakan telah mengerti dan
+            memahami
+            isi akta ini. ------------------------------------------
+        </font>
+    </p>
+
+    <p id="kotak" align="justify">
+        <font size="6">Demikian akta ini dibuat dihadapan para pihak dan : ---------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">{% for pkk in buatakta.get_akta3 %}
+            <b>{{pkk.nik_karyawan.nama_karyawan}}</b>, lahir di {{pkk.nik_karyawan.tempat_lahir_karyawan}}, pada
+            tanggal
+            {{pkk.nik_karyawan.tanggal_lahir_karyawan}} ({{pkk.nik_karyawan.uraian_tl_karyawan}}),
+            {{pkk.nik_karyawan.status_kewarganegaraan_karyawan}}, bertempat
+            tinggal di {{pkk.nik_karyawan.almt_karyawan}}, Rukun Tetangga {{pkk.nik_karyawan.rt_karyawan}},
+            Rukun Warga
+            {{pkk.nik_karyawan.rw_karyawan}}, {{pkk.nik_karyawan.desa_karyawan}}, Kecamatan
+            {{pkk.nik_karyawan.kec_karyawan}},  {{pkk.nik_karyawan.kab_karyawan}}, Pemegang Kartu Tanda
+            Penduduk Republik
+            Indonesia Nomor : {{pkk.nik_karyawan.nik_karyawan}}. yang dikeluarkan oleh 
+            {{pkk.nik_karyawan.kab_karyawan}}, Propinsi {{pkk.nik_karyawan.prov_karyawan}}.
+            <br><br>
+            {% endfor %}
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Keduanya dikenal oleh saya, Pejabat Pembuat Akta Tanah ( PPAT ).
+            sebagai saki-saksi, dan setelah dibacakan serta dijelaskan, maka
+            sebagai bukti kebenaran pernyataan yang dikemukakan oleh
+            Pemberi Kuasa dan Penerima Kuasa tersebut diatas, akta ini ditanda
+            tangani oleh Pemberi Kuasa, Penerima Kuasa, para saksi dan Saya,
+            Pejabat Pembuat Akta Tanah ( PPAT ) sebanyak 2 (dua) rangkap asli
+            terdiri dari 1 (satu) rangkap lembar pertama disimpan di kantor Saya
+            dan 1 (satu) rangkap lembar kedua disampaikan kepada Penerima
+            Kuasa untuk dipergunakan sebagai dasar penandatanganan
+            Akta Pemberian Hak Tanggungan yang bersangkutan.
+            ------------------------------------------------------------------------
+    </p>
+
+    <br>
+    <table>
+        <tr>
+            <th align="center">
+                <font size="6">Pihak Pertama </font>
+                <br>
+                <br>
+                <br>
+                <br>
+            </th>
+            <th>
+                <font size="6">Pihak Kedua </font>
+                <br>
+                <br>
+                <br>
+                <br>
+            </th>
+        </tr>
+
+        <tr>
+            {% for pkm in buatakta.get_akta %}
+            <th align="center">
+                <font size="6">{{pkm.nama_pertama}}</font>
+            </th>
+            {% endfor %}
+            {% for pkd in buatakta.get_akta2 %}
+            <th align="center">
+                <font size="6">{{pkd.nama_kedua}}</font>
+            </th>
+            {% endfor %}
+
+        </tr>
+
+    </table>
+    <br><br>
+    <table>
+        <tr>
+            <th align="center">
+                <font size="6">Persetujuan {{buatakta.status_saksi}} </font>
+                <br>
+                <br>
+                <br>
+                <br>
+            </th>
+        </tr>
+
+        <tr>
+            <th align="center">
+                <font size="6">{{buatakta.nama_saksi}}</font>
+
+            </th>
+        </tr>
+    </table>
+    <br><br>
+    <table>
+        <tr>
+            <th align="center">
+                <font size="6">Saksi </font>
+                <br>
+                <br>
+                <br>
+                <br>
+            </th>
+            <th>
+                <font size="6">Saksi </font>
+                <br>
+                <br>
+                <br>
+                <br>
+            </th>
+        </tr>
+
+        <tr>
+            {% for pkk in buatakta.get_akta3 %}
+            <th align="center">
+                <font size="6">{{pkk.nik_karyawan.nama_karyawan}}</font>
+            </th>
+            {% endfor %}
+        </tr>
+
+    </table>
+    <br><br>
+    <table>
+        <tr>
+            <th align="center">
+                <font size="6">Pejabat Pembuat Akta Tanah </font>
+                <br>
+                <br>
+                <br>
+                <br>
+            </th>
+        </tr>
+        <tr>
+            <th align="center">
+                <font size="6">YOAN BUDIYANTO, S.H.,M.Kn.</font>
+            </th>
+        </tr>
+
+    </table>
+</body>
+
+</html>

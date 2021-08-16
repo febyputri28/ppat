@@ -1,0 +1,637 @@
+{% extends "base.html" %}
+{% load static%}
+{% load crispy_forms_tags%}
+{% block content %}
+
+<div class="main-content">
+    <section class="section">
+        <div class="section-body">
+            <div id="page-wrapper">
+                <div id="page-inner">
+
+                    <div class="container-fluid">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-6">
+                                <div class="card card-body">
+                                    <label id="textsaya"><b>
+                                            <h4>Tambah Data Pihak Pertama</h4>
+                                        </b></label>
+
+                                    <form method="POST" id="TambahClientPertama">
+                                        {% csrf_token %}
+
+
+                                        <input class="form-control" name="nik_pertama" type="text" id="nik_pertama"
+                                            placeholder="NIK">
+                                        <input class="form-control" name="nama_pertama" type="text" id="nama_pertama"
+                                            placeholder="Nama">
+                                        <input class="form-control" name="tempat_lahir_pertama" type="text"
+                                            id="tempat_lahir_pertama" placeholder="Tempat Lahir">
+                                        <input class="form-control" name="tanggal_lahir_pertama" type="text"
+                                            id="tanggal_lahir_pertama" placeholder="Tanggal Lahir">
+                                        <input class="form-control" name="uraian_tl_pertama" type="text"
+                                            id="uraian_tl_pertama" placeholder="Uraian Tanggal Lahir">
+                                        <input class="form-control" name="pekerjaan_pertama" type="text"
+                                            id="pekerjaan_pertama" placeholder="Pekerjaan">
+                                        <select placeholder="Status Kewarganegaraan" class="form-control"
+                                            id="status_kewarganegaraan_pertama" name="status_kewarganegaraan_pertama">
+                                            <option>Warga Negara Indonesia</option>
+                                            <option>Warga Negara Asing</option>
+                                        </select>
+                                        <input class="form-control" name="prov_pertama" type="text" id="prov_pertama"
+                                            placeholder="Provinsi">
+                                        <input class="form-control" name="kab_pertama" type="text" id="kab_pertama"
+                                            placeholder="Kabupaten">
+                                        <input class="form-control" name="alamat_pertama" type="text"
+                                            id="alamat_pertama" placeholder="Alamat">
+                                        <input class="form-control" name="rt_pertama" type="text" id="rt_pertama"
+                                            placeholder="RT">
+                                        <input class="form-control" name="rw_pertama" type="text" id="rw_pertama"
+                                            placeholder="RW">
+                                        <input class="form-control" name="desa_pertama" type="text" id="desa_pertama"
+                                            placeholder="Desa">
+                                        <input class="form-control" name="kec_pertama" type="text" id="kec_pertama"
+                                            placeholder="Kecamatan">
+                                        <br>
+                                        <td><input type="submit" id="simpanpertama" class="btn btn-primary"
+                                                value="Simpan" /></td>
+                                        <td><input type="button" class="btn btn-danger" value="Bersihkan"
+                                                id="clearsatu"></td>
+                                    </form>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card card-body">
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table>
+                                                <tr>
+                                                    <th>
+                                                        <div>
+                                                            <button class="btn btn-outline-primary" data-toggle="modal"
+                                                                data-target="#contohmodal">Masukkan Data Pihak
+                                                                Kedua</button>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div>
+                                                            <button class="btn btn-outline-primary" data-toggle="modal"
+                                                                data-target="#datakaryawan">Masukkan Data
+                                                                Karyawan</button>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div>
+                                                            <button class="btn btn-outline-primary" data-toggle="modal"
+                                                                data-target="#modal_keterangan">Masukkan
+                                                                Keterangan</button>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </table>
+                                            <hr>
+                                            <form id="formtransaksi" method="POST">
+                                                <table class="table table-striped table-bordered table-hover">
+                                                    <h5>Nomor Transaksi</h5>
+                                                    {% csrf_token %}
+                                                    <span><input type="text" name="no_transaksi" id="no_transaksi"
+                                                            value="{{notransaksi}}" size="10">
+                                                    </span>
+                                                </table>
+                                                <hr>
+                                                <table class="table table-striped table-bordered table-hover">
+                                                    <h6 align="center">Data Pihak Pertama</h6>
+                                                    <thead>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>NIK</th>
+                                                                <th>Nama</th>
+                                                                <th>Aksi</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </thead>
+                                                    <tbody id="dataclientsatujs">
+                                                    </tbody>
+                                                </table>
+                                                <hr>
+                                                <table class="table table-striped table-bordered table-hover">
+                                                    <h6 align="center">Data Pihak Kedua</h6>
+                                                    <thead>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>NIK</th>
+                                                                <th>Nama</th>
+                                                                <th>Aksi</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </thead>
+                                                    <tbody id="dataclientduajs">
+
+                                                    </tbody>
+                                                </table>
+
+                                                <hr>
+                                                <table class="table table-striped table-bordered table-hover">
+                                                    <h6 align="center">Saksi</h6>
+
+                                                    <thead>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>NIK</th>
+                                                                <th>Nama</th>
+                                                                <th>Aksi</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </thead>
+                                                    <tbody id="datakaryawanjs">
+                                                    </tbody>
+                                                </table>
+                                                <div align="center">
+                                                    <input type="submit" id="simpantransaksi" class="btn btn-primary"
+                                                        value="Selesai" />
+                                                </div>
+
+                                            </form>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="modal fade" id="contohmodal" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-header">
+                    <h4 class="modal-title">Tambah Data Pihak Kedua</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST" id="TambahClientDua">
+                        {% csrf_token %}
+                        <input class="form-control" type="text" id="nik_kedua" placeholder="NIK">
+                        <input class="form-control" type="text" id="nama_kedua" placeholder="Nama">
+                        <input class="form-control" type="text" id="tempat_lahir_kedua" placeholder="Tempat Lahir">
+                        <input class="form-control" type="text" id="tanggal_lahir_kedua" placeholder="Tanggal Lahir">
+                        <input class="form-control" type="text" id="uraian_tl_kedua" placeholder="Uraian Tanggal Lahir">
+                        <input class="form-control" type="text" id="pekerjaan_kedua" placeholder="Pekerjaan">
+                        <select placeholder="Status Kewarganegaraan" class="form-control"
+                            id="status_kewarganegaraan_kedua" name="status_kewarganegaraan_kedua">
+                            <option>Warga Negara Indonesia</option>
+                            <option>Warga Negara Asing</option>
+                        </select>
+
+                        <input class="form-control" type="text" id="prov_kedua" placeholder="Provinsi">
+                        <input class="form-control" type="text" id="kab_kedua" placeholder="Kabupaten">
+                        <input class="form-control" type="text" id="alamat_kedua" placeholder="Alamat">
+                        <input class="form-control" type="text" id="rt_kedua" placeholder="RT">
+                        <input class="form-control" type="text" id="rw_kedua" placeholder="RW">
+                        <input class="form-control" type="text" id="desa_kedua" placeholder="Desa">
+                        <input class="form-control" type="text" id="kec_kedua" placeholder="Kecamatan">
+                        <br>
+                        <td><input type="submit" id="simpankedua" class="btn btn-primary" value="Simpan" /></td>
+                        <td><input type="button" class="btn btn-danger" value="Bersihkan" id="cleardua"></td>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="datakaryawan" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-header">
+                    <h4 class="modal-title">Masukkan Data Karyawan</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST" id="SaksiKaryawan">
+                        {% csrf_token %}
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="modal_keterangan" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-header">
+                    <h4 class="modal-title">Tambah Keterangan</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+
+                        <input class="form-control" type="text" id="nomor_akta" name="nomor_akta"
+                            placeholder="Nomor Akta">
+                        <input class="form-control" type="text" id="tgl_akta" name="tgl_akta"
+                            placeholder="Tanggal Pembuatan Akta">
+                        <select placeholder="Jenis Pembuatan Hukum" class="form-control" id="jenis" name="jenis">
+                            <option>AJB</option>
+                            <option>APHT</option>
+                            <option>SKMHT</option>
+                            <option>AH</option>
+                            <option>APHB</option>
+                        </select>
+                        <input class="form-control" type="text" id="nomor_hak" name="nomor_hak" placeholder="Nomor Hak">
+                        <input class="form-control" type="text" id="prov_tanah" name="prov_tanah"
+                            placeholder="Provinsi (Letak Aset)">
+                        <input class="form-control" type="text" id="kab_tanah" name="kab_tanah"
+                            placeholder="Kabupaten (Letak Aset)">
+                        <input class="form-control" type="text" id="kec_tanah" name="kec_tanah"
+                            placeholder="Kecamatan (Letak Aset)">
+                        <input class="form-control" type="text" id="desa_tanah" name="desa_tanah"
+                            placeholder="Desa (Letak Aset)">
+                        <input class="form-control" type="text" id="luas_tanah" name="luas_tanah"
+                            placeholder="Luas Tanah">
+                        <input class="form-control" type="text" id="luas_bgn" name="luas_bgn"
+                            placeholder="Luas Bangunan">
+                        <input class="form-control" type="text" id="harga_pengalihan" name="harga_pengalihan"
+                            placeholder="Harga Pengalihan">
+                        <input class="form-control" type="text" id="nop" name="nop" placeholder="NOP">
+                        <input class="form-control" type="text" id="njop" name="njop" placeholder="NJOP">
+                        <input class="form-control" type="text" id="nib" name="nib" placeholder="NIB">
+                        <input class="form-control" type="text" id="tgl_ssp" name="tgl_ssp" placeholder="Tanggal SSP">
+                        <input class="form-control" type="text" id="harga_ssp" name="harga_ssp" placeholder="Harga SSP">
+                        <input class="form-control" type="text" id="tgl_sbb" name="tgl_sbb" placeholder="Tanggal SBB">
+                        <input class="form-control" type="text" id="harga_sbb" name="harga_sbb" placeholder="Harga SBB">
+                        <input class="form-control" type="text" id="keterangan" name="keterangan"
+                            placeholder="Keterangan">
+                        <input class="form-control" type="text" id="pt" name="pt" placeholder="Nama PT">
+                        <input class="form-control" type="text" id="jabatan_pt" name="jabatan_pt"
+                            placeholder="Jabatan Pengalih">
+                        <input class="form-control" type="text" id="jenis_kuasa" name="jenis_kuasa"
+                            placeholder="Jenis Surat Kuasa">
+                        <input class="form-control" type="text" id="keterangan_kuasa" name="keterangan_kuasa"
+                            placeholder="Keterangan Surat Kuasa">
+                        <input class="form-control" type="text" id="jenis_bukti_perjanjian"
+                            name="jenis_bukti_perjanjian" placeholder="Jenis Bukti Perjanjian">
+                        <input class="form-control" type="text" id="no_bukti_ppat"
+                            name="no_bukti_ppat" placeholder="Nomor Bukti PPAT">
+                        <input class="form-control" type="text" id="jumlah_perjanjian" name="jumlah_perjanjian"
+                            placeholder="Jumlah Perjanjian (Rp)">
+                        <input class="form-control" type="text" id="tanggal_perjanjian" name="tanggal_perjanjian"
+                            placeholder="Tanggal Perjanjian">
+                        <input class="form-control" type="text" id="no_perjanjian" name="no_perjanjian"
+                            placeholder="Nomor Perjanjian">
+                        <input class="form-control" name="nik_saksi" type="text" id="nik_saksi" placeholder="NIK Saksi">
+                        <input class="form-control" name="nama_saksi" type="text" id="nama_saksi"
+                            placeholder="Nama Saksi">
+                        <input class="form-control" name="tempat_lahir_saksi" type="text" id="tempat_lahir_saksi"
+                            placeholder="Tempat Lahir Saksi">
+                        <input class="form-control" name="tanggal_lahir_saksi" type="text" id="tanggal_lahir_saksi"
+                            placeholder="Tanggal Lahir Saksi">
+                        <input class="form-control" name="uraian_tl_saksi" type="text" id="uraian_tl_saksi"
+                            placeholder="Uraian Tanggal Lahir Saksi">
+                        <input class="form-control" name="pekerjaan_saksi" type="text" id="pekerjaan_saksi"
+                            placeholder="Pekerjaan Saksi">
+                        <select placeholder="Status Kewarganegaraan Saksi" class="form-control"
+                            id="status_kewarganegaraan_saksi" name="status_kewarganegaraan_saksi">
+                            <option>Warga Negara Indonesia</option>
+                            <option>Warga Negara Asing</option>
+                        </select>
+                        <input class="form-control" name="prov_saksi" type="text" id="prov_saksi"
+                            placeholder="Provinsi (Alamat Saksi)">
+                        <input class="form-control" name="kab_saksi" type="text" id="kab_saksi"
+                            placeholder="Kabupaten (Alamat Saksi)">
+                        <input class="form-control" name="alamat_saksi" type="text" id="alamat_saksi"
+                            placeholder="Alamat Saksi">
+                        <input class="form-control" name="rt_saksi" type="text" id="rt_saksi"
+                            placeholder="RT Saksi (Alamat Saksi)">
+                        <input class="form-control" name="rw_saksi" type="text" id="rw_saksi"
+                            placeholder="RW Saksi (Alamat Saksi)">
+                        <input class="form-control" name="desa_saksi" type="text" id="desa_saksi"
+                            placeholder="Desa Saksi (Alamat Saksi)">
+                        <input class="form-control" name="kec_saksi" type="text" id="kec_saksi"
+                            placeholder="Kecamatan Saksi">
+                        <input class="form-control" name="status_saksi" type="text" id="status_saksi"
+                            placeholder="Status Saksi">
+
+
+                        <br>
+                        <input type="submit" id="simpanketerangan" class="btn btn-primary" value="Simpan" />
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function (e) {
+        $('#dataclientsatujs').load("{% url 'tampilclientsatujs' %}");
+        $('#dataclientduajs').load("{% url 'tampilclientduajs' %}");
+        $('#datakaryawanjs').load("{% url 'TampilKaryawan' %}");
+        $('#SaksiKaryawan').load("{% url 'tampilform' %}");
+
+        $("#simpanpertama").click(function (e) {
+            e.preventDefault();
+            var nik_pertama = $("#nik_pertama").val();
+            var nama_pertama = $("#nama_pertama").val();
+            var tempat_lahir_pertama = $("#tempat_lahir_pertama").val();
+            var tanggal_lahir_pertama = $("#tanggal_lahir_pertama").val();
+            var uraian_tl_pertama = $("#uraian_tl_pertama").val();      
+            var pekerjaan_pertama = $("#pekerjaan_pertama").val();
+            var status_kewarganegaraan_pertama = $("#status_kewarganegaraan_pertama").val();
+            var prov_pertama = $("#prov_pertama").val();
+            var kab_pertama = $("#kab_pertama").val();
+            var alamat_pertama = $("#alamat_pertama").val();
+            var rt_pertama = $("#rt_pertama").val();
+            var rw_pertama = $("#rw_pertama").val();
+            var desa_pertama = $("#desa_pertama").val();
+            var kec_pertama = $("#kec_pertama").val();
+            var csr = $("input[name=csrfmiddlewaretoken]").val();
+
+            if (nik_pertama == "" || nama_pertama == "" || tempat_lahir_pertama == "" || tanggal_lahir_pertama == "" || uraian_tl_pertama =="" || pekerjaan_pertama == "" || status_kewarganegaraan_pertama == "" || prov_pertama == "" || kab_pertama == "" || alamat_pertama == "" || rt_pertama == "" || rw_pertama == "" || desa_pertama == "" || kec_pertama == "" || kec_pertama == ""){
+                alert("Data Tidak Boleh Kosong!!")
+            }
+             else {
+                mydata = { nik_pertama: nik_pertama, nama_pertama: nama_pertama, tempat_lahir_pertama: tempat_lahir_pertama, tanggal_lahir_pertama: tanggal_lahir_pertama,uraian_tl_pertama: uraian_tl_pertama, pekerjaan_pertama: pekerjaan_pertama, status_kewarganegaraan_pertama: status_kewarganegaraan_pertama, prov_pertama: prov_pertama, kab_pertama: kab_pertama, alamat_pertama: alamat_pertama, rt_pertama: rt_pertama, rw_pertama: rw_pertama, desa_pertama: desa_pertama, kec_pertama: kec_pertama, csrfmiddlewaretoken: csr };
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'simpanclientpertama' %}",
+                    data: mydata,
+                    success: function (data) {
+
+                        $('#dataclientsatujs').load("{% url 'tampilclientsatujs' %}");
+
+                    }
+                });
+            }
+
+        });
+
+        $('#clearsatu').click(function () {
+            $('#TambahClientPertama')[0].reset()
+        });
+
+        $("#simpankedua").click(function (e) {
+            e.preventDefault();
+            var nik_kedua = $("#nik_kedua").val();
+            var nama_kedua = $("#nama_kedua").val();
+            var tempat_lahir_kedua = $("#tempat_lahir_kedua").val();
+            var tanggal_lahir_kedua = $("#tanggal_lahir_kedua").val();
+            var uraian_tl_kedua = $("#uraian_tl_kedua").val();           
+            var pekerjaan_kedua = $("#pekerjaan_kedua").val();
+            var status_kewarganegaraan_kedua = $("#status_kewarganegaraan_kedua").val();
+            var prov_kedua = $("#prov_kedua").val();
+            var kab_kedua = $("#kab_kedua").val();
+            var alamat_kedua = $("#alamat_kedua").val();
+            var rt_kedua = $("#rt_kedua").val();
+            var rw_kedua = $("#rw_kedua").val();
+            var desa_kedua = $("#desa_kedua").val();
+            var kec_kedua = $("#kec_kedua").val();
+            var csr = $("input[name=csrfmiddlewaretoken]").val();
+
+            if (nik_kedua == "" || nama_kedua == "" || tempat_lahir_kedua == "" || tanggal_lahir_kedua == "" || uraian_tl_kedua =="" || pekerjaan_kedua == "" || status_kewarganegaraan_kedua == "" || prov_kedua == "" || kab_kedua == "" || alamat_kedua == "" || rt_kedua == "" || rw_kedua == "" || desa_kedua == "" || kec_kedua == "" || kec_kedua == "") {
+                alert("Data Tidak Boleh Kosong!!")
+
+            } else {
+                mydata = { nik_kedua: nik_kedua, nama_kedua: nama_kedua, tempat_lahir_kedua: tempat_lahir_kedua, tanggal_lahir_kedua: tanggal_lahir_kedua,uraian_tl_kedua:uraian_tl_kedua, pekerjaan_kedua: pekerjaan_kedua, status_kewarganegaraan_kedua: status_kewarganegaraan_kedua, prov_kedua: prov_kedua, kab_kedua: kab_kedua, alamat_kedua: alamat_kedua, rt_kedua: rt_kedua, rw_kedua: rw_kedua, desa_kedua: desa_kedua, kec_kedua: kec_kedua, csrfmiddlewaretoken: csr };
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'simpanclientkedua' %}",
+                    data: mydata,
+                    success: function (data) {
+
+                        $('#dataclientduajs').load("{% url 'tampilclientduajs' %}");
+
+                    }
+                });
+            }
+
+        });
+
+        $('#cleardua').click(function () {
+            $('#TambahClientDua')[0].reset()
+        });
+
+        $("#SaksiKaryawan").submit(function (e) {
+            e.preventDefault();
+            var serializedData = $(this).serialize();
+            $.ajax({
+                type: "POST",
+                url: "{% url 'SimpanFormK' %}",
+                data: serializedData,
+                success: function (response) {
+                    $('#SaksiKaryawan').trigger('reset');
+                    $('#datakaryawanjs').load("{% url 'TampilKaryawan' %}");
+
+                },
+                error: function (response) {
+                    alert(response["responseJSON"]["error"]);
+                }
+
+
+            });
+
+        });
+
+        $("#simpanketerangan").click(function (e) {
+            e.preventDefault();
+
+            var nomor_akta = $("#nomor_akta ").val();
+            var tgl_akta = $("#tgl_akta").val();
+            var jenis = $("#jenis").val();
+            var nomor_hak = $("#nomor_hak").val();
+            var prov_tanah = $("#prov_tanah").val();
+            var kab_tanah = $("#kab_tanah").val();
+            var kec_tanah = $("#kec_tanah").val();
+            var desa_tanah = $("#desa_tanah").val();
+            var luas_tanah = $("#luas_tanah").val();
+            var luas_bgn = $("#luas_bgn").val();
+            var harga_pengalihan = $("#harga_pengalihan").val();
+            var nop = $("#nop").val();
+            var njop = $("#njop").val();
+            var nib = $("#nib").val();
+            var tgl_ssp = $("#tgl_ssp").val();
+            var harga_ssp = $("#harga_ssp").val();
+            var tgl_sbb = $("#tgl_sbb").val();
+            var harga_sbb = $("#harga_sbb").val();            
+            var keterangan = $("#keterangan").val();
+            var pt = $("#pt").val();
+            var jabatan_pt = $("#jabatan_pt").val();
+            var jenis_kuasa = $("#jenis_kuasa").val();
+            var keterangan_kuasa = $("#keterangan_kuasa").val();
+            var jenis_bukti_perjanjian = $("#jenis_bukti_perjanjian").val();
+            var no_bukti_ppat = $("#no_bukti_ppat").val(); 
+            var jumlah_perjanjian = $("#jumlah_perjanjian").val();
+            var tanggal_perjanjian = $("#tanggal_perjanjian").val();            
+            var no_perjanjian = $("#no_perjanjian").val();
+            var nik_saksi = $("#nik_saksi").val();
+            var nama_saksi = $("#nama_saksi").val();
+            var tempat_lahir_saksi = $("#tempat_lahir_saksi").val();
+            var tanggal_lahir_saksi = $("#tanggal_lahir_saksi").val();
+            var uraian_tl_saksi = $("#uraian_tl_saksi").val();            
+            var pekerjaan_saksi = $("#pekerjaan_saksi").val();
+            var status_kewarganegaraan_saksi = $("#status_kewarganegaraan_saksi").val();
+            var prov_saksi = $("#prov_saksi").val();
+            var kab_saksi = $("#kab_saksi").val();
+            var alamat_saksi = $("#alamat_saksi").val();
+            var rt_saksi = $("#rt_saksi").val();
+            var rw_saksi = $("#rw_saksi").val();
+            var desa_saksi = $("#desa_saksi").val();
+            var kec_saksi = $("#kec_saksi").val();
+            var status_saksi = $("#status_saksi").val();          
+            var csr = $("input[name=csrfmiddlewaretoken]").val();
+
+            mydata = { nomor_akta: nomor_akta, tgl_akta: tgl_akta, jenis: jenis, nomor_hak: nomor_hak, prov_tanah: prov_tanah, kab_tanah: kab_tanah, kec_tanah: kec_tanah, desa_tanah: desa_tanah, luas_tanah: luas_tanah, luas_bgn: luas_bgn, harga_pengalihan: harga_pengalihan, nop: nop, njop: njop, nib: nib, tgl_ssp: tgl_ssp, harga_ssp: harga_ssp, tgl_sbb: tgl_sbb, harga_sbb:harga_sbb, keterangan: keterangan, pt: pt, jabatan_pt: jabatan_pt, jenis_kuasa: jenis_kuasa, keterangan_kuasa: keterangan_kuasa, jenis_bukti_perjanjian: jenis_bukti_perjanjian,no_bukti_ppat:no_bukti_ppat, jumlah_perjanjian: jumlah_perjanjian, tanggal_perjanjian:tanggal_perjanjian,no_perjanjian: no_perjanjian, nik_saksi: nik_saksi, nama_saksi: nama_saksi, tempat_lahir_saksi: tempat_lahir_saksi, tanggal_lahir_saksi: tanggal_lahir_saksi,uraian_tl_saksi:uraian_tl_saksi, pekerjaan_saksi: pekerjaan_saksi, status_kewarganegaraan_saksi: status_kewarganegaraan_saksi, prov_saksi: prov_saksi, kab_saksi: kab_saksi, alamat_saksi: alamat_saksi, rt_saksi: rt_saksi, rw_saksi: rw_saksi, desa_saksi: desa_saksi, kec_saksi: kec_saksi,status_saksi:status_saksi, csrfmiddlewaretoken: csr };
+            $.ajax({
+                type: "POST",
+                url: "{% url 'simpanketerangan' %}",
+                data: mydata,
+                success: function (data) {
+                    alert('keterangan berhasil disimpan')
+                }
+            });
+        });
+
+        $('body').on('click', '#hapussatu', function (e) {
+            e.preventDefault();
+            var id = $(this).data("id");
+            var nik_pertama = $(this).data("nik_pertama");
+            var nama_pertama = $(this).data("nama_pertama");
+            var tempat_lahir_pertama = $(this).data("tempat_lahir_pertama");
+            var tanggal_lahir_pertama = $(this).data("tanggal_lahir_pertama");
+            var pekerjaan_pertama = $(this).data("pekerjaan_pertama");
+            var status_kewarganegaraan_pertama = $(this).data("status_kewarganegaraan_pertama");
+            var prov_pertama = $(this).data("prov_pertama");
+            var kab_pertama = $(this).data("kab_pertama");
+            var alamat_pertama = $(this).data("alamat_pertama");
+            var rt_pertama = $(this).data("rt_pertama");
+            var rw_pertama = $(this).data("rw_pertama");
+            var desa_pertama = $(this).data("desa_pertama");
+            var kec_pertama = $(this).data("kec_pertama");
+            var csr = $("input[name=csrfmiddlewaretoken]").val();
+            mydata = { id: id, nik_pertama: nik_pertama, nama_pertama: nama_pertama, tempat_lahir_pertama: tempat_lahir_pertama, tanggal_lahir_pertama: tanggal_lahir_pertama, pekerjaan_pertama: pekerjaan_pertama, status_kewarganegaraan_pertama: status_kewarganegaraan_pertama, prov_pertama: prov_pertama, kab_pertama: kab_pertama, alamat_pertama: alamat_pertama, rt_pertama: rt_pertama, rw_pertama: rw_pertama, desa_pertama: desa_pertama, kec_pertama: kec_pertama, csrfmiddlewaretoken: csr };
+            mythis = this;
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'hapusclientsatu' %}",
+                data: mydata,
+                success: function (data) {
+                    if (data.status == 1) {
+                        $('#dataclientsatujs').load("{% url 'tampilclientsatujs' %}");
+                        $(mythis).closest("tr").fadeOut();
+
+                    }
+                }
+            });
+        });
+
+        $('body').on('click', '#hapusdua', function (e) {
+            e.preventDefault();
+            var id = $(this).data("id");
+            var nik_kedua = $(this).data("nik_kedua");
+            var nama_kedua = $(this).data("nama_kedua");
+            var tempat_lahir_kedua = $(this).data("tempat_lahir_kedua");
+            var tanggal_lahir_kedua = $(this).data("tanggal_lahir_kedua");
+            var pekerjaan_kedua = $(this).data("pekerjaan_kedua");
+            var status_kewarganegaraan_kedua = $(this).data("status_kewarganegaraan_kedua");
+            var prov_kedua = $(this).data("prov_kedua");
+            var kab_kedua = $(this).data("kab_kedua");
+            var alamat_kedua = $(this).data("alamat_kedua");
+            var rt_kedua = $(this).data("rt_kedua");
+            var rw_kedua = $(this).data("rw_kedua");
+            var desa_kedua = $(this).data("desa_kedua");
+            var kec_kedua = $(this).data("kec_kedua");
+            var csr = $("input[name=csrfmiddlewaretoken]").val();
+            mydata = { id: id, nik_kedua: nik_kedua, nama_kedua: nama_kedua, tempat_lahir_kedua: tempat_lahir_kedua, tanggal_lahir_kedua: tanggal_lahir_kedua, pekerjaan_kedua: pekerjaan_kedua, status_kewarganegaraan_kedua: status_kewarganegaraan_kedua, prov_kedua: prov_kedua, kab_kedua: kab_kedua, alamat_kedua: alamat_kedua, rt_kedua: rt_kedua, rw_kedua: rw_kedua, desa_kedua: desa_kedua, kec_kedua: kec_kedua, csrfmiddlewaretoken: csr };
+            mythis = this;
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'hapusclientkedua' %}",
+                data: mydata,
+                success: function (data) {
+                    if (data.status == 1) {
+                        $('#dataclientduajs').load("{% url 'tampilclientduajs' %}");
+                        $(mythis).closest("tr").fadeOut();
+
+                    }
+                }
+            });
+        });
+
+        $('body').on('click', '#hapuskaryawan', function (e) {
+            e.preventDefault();
+            var id = $(this).data("id");
+            var id_karyawan = $(this).data("id_karyawan");
+            
+            var csr = $("input[name=csrfmiddlewaretoken]").val();
+            mydata = { id: id, id_karyawan: id_karyawan, csrfmiddlewaretoken: csr };
+            mythis = this;
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'hapuskaryawan' %}",
+                data: mydata,
+                success: function (data) {
+                    if (data.status == 1) {
+                        $('#datakaryawanjs').load("{% url 'TampilKaryawan' %}");
+                        $(mythis).closest("tr").fadeOut();
+
+                    }
+                }
+            });
+        });
+
+        $('body').on('submit', '#formtransaksi', function (e) {
+            e.preventDefault();
+            var no_transaksi = $('#no_transaksi').val();
+            var dataclientsatujs = $('#dataclientsatujs').val();
+            var dataclientduajs = $('#dataclientduajs').val();
+            var datakaryawanjs = $('#datakaryawanjs').val();
+
+            if (dataclientsatujs == "Data Kosong" || dataclientduajs == "Data Kosong" || datakaryawanjs == "Data Kosong") {
+                alert("Data Belum Terisi");
+            } else {
+                $.ajax({
+                    url: "{% url 'simpantransaksi' %}",
+                    type: "post",
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    async: false,
+                    beforeSend: function () {
+                        $('#simpantransaksi').html("Loading...");
+                    },
+                    success: function (data) {
+                        window.location = "{% url 'buatakta' %}";
+                        alert('Data Akta Berhasil Disimpan')
+
+                    }
+                });
+
+            }
+
+
+
+
+        });
+
+    });
+
+</script>
+
+{% endblock content%}

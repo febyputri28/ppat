@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static%}
+{% load crispy_forms_tags%}
+{% block content %}
+
+<div class="main-content">
+    <section class="section">
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Tambah Karyawan</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if messages %}
+                        {% for pesan in messages %}
+                        <div class="alert alert-{{ pesan.tags }}" align="center">
+                            <b>{{ pesan }}</b>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+                        <form action="{%url 'formkaryawan'%}" method="POST">
+                            {% csrf_token %}
+
+                            {{form|crispy}}
+                            <div class="form-group mt-3">
+                                <label>Username: </label>
+                                <input type="text" class="form-control" name="username" id="date-mask"
+                                    placeholder="Username">
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <label>Password: </label>
+                                <input type="password" class="form-control" name="password" id="date-mask"
+                                    placeholder="Password">
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <label>Ulangi Password: </label>
+                                <input type="password" class="form-control" name="password2" id="date-mask"
+                                    placeholder="Password">
+                                <br>
+                                <input type="submit" class="btn btn-primary" value="Save" />
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content%}

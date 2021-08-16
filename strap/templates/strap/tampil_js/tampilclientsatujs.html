@@ -1,0 +1,22 @@
+
+{% for r in temp %}
+
+<tr>
+
+    <td>{{ r.nik_pertama}}</td>
+    <td>{{ r.nama_pertama}}</td>
+    <td><button id="hapussatu" data-id="{{r.id}}" data-nik_pertama="{{r.nik_pertama}}"
+            data-nama_pertama="{{r.nama_pertama}}" data-tempat_lahir_pertama= "{{r.tempat_lahir_pertama}}"
+            data-tanggal_lahir_pertama="{{r.tanggal_lahir_pertama}}" data-pekerjaan_pertama="{{r.pekerjaan_pertama}}"
+            data-status_kewarganegaraan_pertama="{{r.status_kewarganegaraan_pertama}}" data-prov_pertama="{{r.prov_pertama}}"
+            data-kab_pertama="{{r.kab_pertama}}" data-alamat_pertama="{{r.alamat_pertama}}" data-rt_pertama="{{r.rt_pertama}}"
+            data-rw_pertama="{{r.rw_pertama}}" data-desa_pertama="{{r.desa_pertama}}" data-kec_pertama="{{r.kec_pertama}}"
+            class="btn btn-danger"><i class="fa fa-pencil"></i></i>
+            HAPUS</button></td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan="6" align="center">Data Kosong</td>
+</tr>
+{% endfor %}
+

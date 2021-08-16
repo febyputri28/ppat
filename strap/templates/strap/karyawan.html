@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static%}
+{% block content %}
+
+
+<div class="main-content">
+    <section class="section">
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Tabel Data Karyawan</h3>
+                        </div>
+                        
+                        <div class="card-body">
+                            <div align="right">
+                                <a href="{% url 'formkaryawan'%}" class="btn btn-success"><i class="fa fa-edit"></i>Tambah Data Karyawan</a>
+                            </div>
+                            <br>
+                            <div class="table-responsive">
+                                <table id="mainTable" class="table table-striped">
+                                    <thead>
+                                        <thead>
+                                            <tr>
+                                                <th>NIK </th>
+                                                <th>Nama</th>
+                                                <th>Telepon</th>
+                                                <th>Alamat</th>
+                                                <th>Tempat, Tanggal Lahir</th>
+                                                <th>Jenis Kelamin</th>
+                                                <th>Jabatan</th>
+                                                <th>Aksi</th>
+        
+                                            </tr>
+                                        </thead>
+                                    </thead>
+                                    <tbody>
+                                        {% for datakaryawan in karyawan %}
+                                        <tr>
+                                            <td>{{ datakaryawan.nik_karyawan }}</td>
+                                            <td>{{ datakaryawan.nama_karyawan }}</td>
+                                            <td>{{ datakaryawan.telp_karyawan }}</td>
+                                            <td>{{ datakaryawan.almt_karyawan }} RT {{datakaryawan.rt_karyawan}} RW {{datakaryawan.rw_karyawan}} {{datakaryawan.desa_karyawan}}</td>
+                                            <td>{{ datakaryawan.tempat_lahir_karyawan }}, {{ datakaryawan.tanggal_lahir_karyawan }}</td>
+                                            <td>{{ datakaryawan.jenkel_karyawan }}</td>
+                                            <td>{{ datakaryawan.jabatan }}</td>
+                                            <td>
+                                                <a href="{% url 'updatekaryawan' datakaryawan.id %}"><button
+                                                    class="btn btn-info" type="submit"><i class="fas fa-sync"></i> Edit</button></a>
+        
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+        
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock content%}

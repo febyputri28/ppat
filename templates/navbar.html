@@ -1,0 +1,29 @@
+{% load static%}
+<div class="main-sidebar sidebar-style-2">
+    <aside id="sidebar-wrapper">
+      <div class="sidebar-brand">
+        <a href="{% url 'beranda'%}">
+           <span
+            class="logo-name">PPAT</span>
+        </a>
+      </div>
+      <ul class="sidebar-menu">
+        
+        <li class="dropdown">
+          <a href="{% url 'beranda'%}" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+        </li>
+        <li class="dropdown">
+            <a href="{% url 'buatakta'%}" class="nav-link"><i data-feather="folder-plus"></i><span>Tambah Data Akta</span></a>
+          </li>
+          <li class="dropdown">
+            <a href="{% url 'aktamasuk'%}" class="nav-link"><i data-feather="file-text"></i><span>Akta Masuk</span></a>
+          </li>
+          <li class="dropdown">
+            <a href="{% url 'jenis'%}" class="nav-link"><i data-feather="archive"></i><span>Jenis Akta</span></a>
+          </li>
+          <li class="dropdown">
+            <a href="{% url 'karyawan'%}" class="nav-link"><i data-feather="users"></i><span>Karyawan</span></a>
+          </li>
+        
+    </aside>
+  </div>

@@ -1,0 +1,17 @@
+
+{% for r in temp %}
+
+<tr>
+
+    <td>{{ r.nik_karyawan.nik_karyawan}}</td>
+    <td>{{ r.nik_karyawan.nama_karyawan}}</td>
+    <td><button id="hapuskaryawan" data-id="{{r.id}}" data-id_karyawan="{{r.id_karyawan}}"
+            class="btn btn-danger"><i class="fa fa-pencil"></i></i>
+            HAPUS</button></td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan="6" align="center">Data Kosong</td>
+</tr>
+{% endfor %}
+

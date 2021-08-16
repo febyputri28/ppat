@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static%}
+{% block content %}
+<style>
+    .profile-pic {
+        max-width: 200px;
+        max-height: 200px;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
+</style>
+
+<div class="main-content">
+    <section class="section">
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card card-body">
+                    <a class="btn btn-warning" href="{%url 'beranda'%}">&#8592; Beranda </a>
+                    <hr>
+     
+                    <img class="profile-pic" src="{{request.user.karyawan.profile_pic.url}}">
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card card-body">
+                    <table>
+                        <form method="POST" action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ formkaryawan.as_p }}
+                            <input class="btn btn-primary" type="submit" name="Update">
+                        </form>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

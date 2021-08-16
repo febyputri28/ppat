@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>PDF</title>
+    <style>
+        #atas {
+            padding-left: 50px;
+            padding-right: 30px;
+
+        }
+
+        #kotak {
+            padding-left: 120px;
+            padding-right: 60px;
+
+
+        }
+
+        #pertama {
+            padding-left: 140px;
+            padding-right: 60px;
+        }
+
+        #ttd {
+
+            padding-left: 100px;
+            padding-right: 60px;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <center>
+        <p id="kotak">
+            <font size="7"><b>PEJABAT PEMBUAT AKTA TANAH</b></font>
+        </p>
+        <p id="kotak">
+            <font size="7"><b>(PPAT)</b></font>
+        </p>
+        <p id="kotak">
+            <font size="7"><b>YOAN BUDIYANTO, S.H, M.Kn.</b></font>
+        </p>
+        <p id="kotak">
+            <font size="6">DAERAH KERJA KABUPATEN PROBOLINGGO</font>
+        </p>
+        <p id="kotak">
+            <font size="6">SK. Kepala Badan Pertanahan Nasional Republik Indonesia</font>
+        </p>
+        <p id="kotak">
+            <font size="6">Nomor 223/KEP-17.3/X/2014, Tanggal 17 Oktober 2014</font>
+        </p>
+        <p id="kotak">
+            <font size="6">Jalan Raya Surabaya – Situbondo KM 134, Telp. 0335-771781</font>
+        </p>
+        <p id="kotak">
+            <font size="6">PAITON – PROBOLINGGO Jawa Timur (67291) </font>
+        </p><br>
+        <p id="kotak">
+            <font size="6"><b>AKTA PEMBAGIAN HAK BERSAMA</b></font>
+        </p>
+        <p id="kotak">
+            <font size="6"><b>Nomor : {{buatakta.nomor_akta}}</b>
+        </p><br>
+
+    </center>
+    <p id="kotak" align="justify">
+        <font size="6">Hadir dihadapan saya, <b>YOAN BUDIYANTO, Sarjana Hukum, Magister Kenotariatan,</b> yang berdasarkan Surat Keputusan
+            Kepala Badan Pertanahan Nasional Republik Indonesia Tanggal 17 Oktober 2014 Nomor 223/KEP-17.3/X/2014,
+            diangkat sebagai Pejabat Pembuat Akta Tanah, yang selanjutnya disebut PPAT, yang dimaksud dalam Pasal 7
+            Peraturan Pemerintah Nomor 24 Tahun 1997 tentang Pendaftaran Tanah, dengan daerah kerja Kabupaten
+            Probolinggo dan berkantor di Jalan Surabaya - Situbondo KM 134 Paiton Probolinggo, dengan dihadiri oleh
+            saksi-saksi yang Saya kenal dan akan disebut pada bagian akhir akta ini :
+            -----------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6"> {% for pkm in buatakta.get_akta %}
+            <b>{{pkm.nama_pertama}}</b>, lahir di {{pkm.tempat_lahir_pertama}}, pada tanggal {{pkm.tanggal_lahir_pertama}}
+            ({{pkm.uraian_tl_pertama}}), {{pkm.status_kewarganegaraan_pertama}}, Pekerjaan {{pkm.pekerjaan_pertama}},
+            bertempat tinggal di
+             {{pkm.kab_pertama}}, {{pkm.alamat_pertama}}, Rukun Tetangga {{pkm.rt_pertama}}, Rukun Warga
+            {{pkm.rw_pertama}}, {{pkm.desa_pertama}},
+            Kecamatan {{pkm.kec_pertama}}, Pemegang Kartu Tanda Penduduk Provinsi {{pkm.prov_pertama}} 
+            {{pkm.kab_pertama}} Nomor :
+            {{pkm.nik_pertama}}. <br><br>
+            {% endfor %}
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">------------------- Selanjutnya disebut PIHAK PERTAMA -------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">{% for pkd in buatakta.get_akta2 %}
+            <b>{{pkd.nama_kedua}}</b>, lahir di {{pkd.tempat_lahir_kedua}}, pada tanggal {{pkd.tanggal_lahir_kedua}}
+            ({{pkd.uraian_tl_kedua}}), {{pkd.status_kewarganegaraan_kedua}}, Pekerjaan {{pkd.pekerjaan_kedua}}, bertempat
+            tinggal di
+             {{pkd.kab_kedua}}, {{pkd.alamat_kedua}}, Rukun Tetangga {{pkd.rt_kedua}}, Rukun Warga
+            {{pkd.rw_kedua}}, {{pkd.desa_kedua}},
+            Kecamatan {{pkd.kec_kedua}}, Pemegang Kartu Tanda Penduduk Provinsi {{pkd.prov_kedua}} 
+            {{pkd.kab_kedua}} Nomor :
+            {{pkd.nik_kedua}}.<br><br>
+            {% endfor %}
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">-------------------- Selanjutnya disebut PIHAK KEDUA ----------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Para penghadap dikenal oleh Saya Pejabat. --------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Para Pihak menerangkan bahwa mereka bersama-sama adalah
+            pemegang hak dibawah ini : -----------------------------------------------------
+        </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Hak Milik : Nomor {{buatakta.nomor_hak}} atas sebidang tanah seluas {{buatakta.luas_tanah}} m2 dengan
+            Nomor Identifikasi Bidang Tanah (NIB) : {{buatakta.nib}} dan Surat Pemberitahuan Pajak Terhutang Pajak Bumi
+            dan Bangunan (SPPTPBB) Nomor Objek Pajak (NOP) : {{buatakta.nop}}.</font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">terletak di : ----------------------------------------------------------------------------<br>
+        <font size="6">Provinsi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{buatakta.prov_tanah}}<br>
+        <font size="6">Kabupaten &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{buatakta.kab_tanah}}<br>
+        <font size="6">Kecamatan &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{buatakta.kec_tanah}}<br>
+        <font size="6">Desa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{buatakta.desa_tanah}}<br>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Selanjutnya dalam akta ini disebut "Hak Bersama”. -----------------------</font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Para Pihak selanjutnya menerangkan bahwa mereka telah sepakat untuk mengakhiri pemilikan bersama
+            atas Hak Bersama tersebut dan untuk itu dengan menyepakati Pembagian Hak Bersama tersebut sebagai berikut :
+            ---------------------------------------------------------</font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Pihak Kedua memperoleh dan menjadi Pemegang tunggal dari: Sebidang tanah sebagian Hak Milik
+            Nomor : {{buatakta.nomor_hak}}, atas sebidang tanah seluas {{buatakta.luas_tanah}} M2, sebagaimana diuraikan diatas ;</font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Pembagian Hak Bersama diatas juga meliputi : ---------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">segala sesuatu yang berada diatas tanah tersebut yang karena jenis dan ketentuannya menurut hukum
+            dapat dianggap sebagai benda tetap.
+            -----------------------------------------------------------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Selanjutnya para pihak menerangkan bahwa: ------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">a. Dalam pembagian Hak Bersama ini tidak terdapat kelebihan nilai yang diperoleh oleh salah satu
+            pihak; -----------------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">b. Pembagian hak bersama ini dilakukan dengan syarat-syarat lebih lanjut sebagai berikut :
+            -------------------------------------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">---------------------------------------- Pasal 1 ----------------------------------------</font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Mulai hari ini hak yang diuraikan dalam akta ini telah menjadi milik Pihak Kedua yang
+            memperolehnya dan karenanya segala keuntungan yang didapat dari, dan segala kerugian/beban atas hak tersebut
+            diatas menjadi hak/beban pihak yang memperoleh hak tersebut.
+            -------------------------------------------------------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">---------------------------------------- Pasal 2 ----------------------------------------</font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Hak tersebut diterima oleh masing-masing pihak yang memperolehnya menurut keadaannya sebagaimana
+            didapatinya pada hari ini dan masing-masing pihak dengan ini menyatakan tidak akan mengadakan segala
+            tuntutan mengenai kerusakan dan/ atau cacat yang tampak dan/atau tidak tampak.
+            ----------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">---------------------------------------- Pasal 3 ----------------------------------------</font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Para pihak yang memperoleh hak dalam pembagian hak bersama ini dengan ini menyatakan bahwa dengan
+            pembagian hak bersama ini kepemilikan tanahnya tidak melebihi ketentuan maksimum penguasaan tanah
+            menurut ketentuan perundang-undangan yang berlaku sebagaimana tercantum dalam pernyataan sebagai berikut :-
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">a. bahwa kami dengan pemindahan hak tersebut tidak menjadi pemegang hak atas tanah yang melebihi
+            ketentuan maksimum penguasaan tanah yang melebihi ketentuan peraturan perundang-undangan yang berlaku,
+            -------------------------------------------</font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">b. bahwa kami dengan pemindahan hak tersebut tidak menjadi pemegang hak atas tanah absentee
+            (guntai) menurut ketentuan peraturan perundang-undangan yang berlaku, -----------------------------</font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">c. Apabila pernyataan dimaksud pada huruf a dan b tersebut tidak benar, maka tanah kelebihan atau
+            tanah Absentee tersebut menjadi obyek Landreform,
+            ------------------------------------------------------------------</font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">d. Kesemua para pihak bersedia menanggung semua akibat hukumnya, apabila pernyataan sebagaimana
+            yang dimaksud pada huruf a dan b tidak benar. --------------------------------------------------------
+        </font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">---------------------------------------- Pasal 4 ----------------------------------------</font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Dalam hal terdapat perbedaan luas tanah yang diuraikan dalam pembagian hak bersama ini dengan
+            hasil pengukuran oleh instansi Badan Pertanahan Nasional, maka para pihak akan menerima hasil pengukuran
+            instansi Badan Pertanahan Nasional tersebut. -------------
+
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">---------------------------------------- Pasal 5 ----------------------------------------</font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Para pihak menyatakan dengan ini, bahwa identitas masing-masing pihak dan/atau dokumen adalah
+            benar adanya dan sesuai dengan data yang diberikan kepada saya, Pejabat.
+            Jika dikemudian hari ternyata hal tersebut tidak benar, sehingga timbul tuntutan hukum, maka kesemuanya itu
+            menjadi tanggung jawab masing-masing pihak, sedangkan Pejabat Pembuat Akta Tanah (PPAT) dibebaskan dari
+            segala tuntutan hukum. -----------------------------------------------------
+
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">---------------------------------------- Pasal 6 ----------------------------------------</font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Para pihak menjamin, bahwa Obyek Hak Bersama tersebut, adalah benar miliknya dan mereka adalah
+            satu-satunya yang berhak untuk membagi atau memindahkan segala apa yang dibagi menurut akta ini serta
+            menjamin bahwa pihak yang memperolehnya tidak akan diganggu gugat oleh siapapun juga.
+            -------------------------------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">---------------------------------------- Pasal 7 ----------------------------------------</font>
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Para pihak dalam hal ini dengan segala akibatnya memilih tempat kediaman hukum yang umum dan
+            tidak berubah pada Kantor Panitera Pengadilan Negeri Kabupaten Probolinggo. ---------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">---------------------------------------- Pasal 8 ----------------------------------------</font>
+    </p>
+
+    <p id="kotak" align="justify">
+        <font size="6">Biaya pembuatan akta ini, uang saksi, pajak-pajak yang timbul dan segala biaya peralihan hak ini
+            dibayar oleh Pihak Kedua. ---------------
+    </p>
+
+    <p id="kotak" align="justify">
+        <font size="6">Demikian akta ini dibuat dihadapan para pihak dan : ---------------------
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">{% for pkk in buatakta.get_akta3 %}
+            <b>{{pkk.nik_karyawan.nama_karyawan}}</b>, lahir di {{pkk.nik_karyawan.tempat_lahir_karyawan}}, pada tanggal
+            {{pkk.nik_karyawan.tanggal_lahir_karyawan}} ({{pkk.nik_karyawan.uraian_tl_karyawan}}), {{pkk.nik_karyawan.status_kewarganegaraan_karyawan}}, bertempat
+            tinggal di {{pkk.nik_karyawan.almt_karyawan}}, Rukun Tetangga {{pkk.nik_karyawan.rt_karyawan}}, Rukun Warga
+            {{pkk.nik_karyawan.rw_karyawan}}, {{pkk.nik_karyawan.desa_karyawan}}, Kecamatan
+            {{pkk.nik_karyawan.kec_karyawan}}, {{pkk.nik_karyawan.kab_karyawan}}, Pemegang Kartu Tanda
+            Penduduk Republik
+            Indonesia Nomor : {{pkk.nik_karyawan.nik_karyawan}}. yang dikeluarkan oleh 
+            {{pkk.nik_karyawan.kab_karyawan}}, Propinsi {{pkk.nik_karyawan.prov_karyawan}}.
+            <br><br>
+            {% endfor %}
+    </p>
+    <p id="kotak" align="justify">
+        <font size="6">Keduanya Pegawai Kantor Pejabat Pembuat Akta Tanah yang beralamat kantor di Jalan Surabaya –
+            Situbondo KM 134, Kecamatan Paiton, Kabupaten Probolinggo, sebagai saksi-saksi, dan setelah dibacakan serta
+            dijelaskan, maka sebagai bukti kebenaran pernyataan yang dikemukakan oleh Pihak Pertama dan Pihak Kedua
+            tersebut diatas, akta ini ditandatangani oleh Pihak Pertama, Pihak Kedua, para saksi dan Saya, PPAT,
+            sebanyak 2 (dua) rangkap asli, yaitu 1 (satu) rangkap lembar pertama disimpan di kantor Saya, dan 1 (satu)
+            rangkap lembar kedua disampaikan kepada Kepala Kantor Pertanahan Kabupaten Probolinggo, untuk keperluan
+            pendaftaran peralihan hak akibat Hibah dalam akta ini. ----
+    </p>
+    <br>
+    <table>
+        <tr>
+            <th align="center">
+                <font size="6">Pihak Pertama </font>
+                <br>
+                <br>
+                <br>
+                <br>
+            </th>
+            <th>
+                <font size="6">Pihak Kedua </font>
+                <br>
+                <br>
+                <br>
+                <br>
+            </th>
+        </tr>
+
+        <tr>
+            {% for pkm in buatakta.get_akta %}
+            <th align="center">
+                <font size="6">{{pkm.nama_pertama}}</font>
+            </th>
+            {% endfor %}
+            {% for pkd in buatakta.get_akta2 %}
+            <th align="center">
+                <font size="6">{{pkd.nama_kedua}}</font>
+            </th>
+            {% endfor %}
+
+        </tr>
+
+    </table>
+    <br><br>
+    <table>
+        <tr>
+            <th align="center">
+                <font size="6">Saksi </font>
+                <br>
+                <br>
+                <br>
+                <br>
+            </th>
+            <th>
+                <font size="6">Saksi </font>
+                <br>
+                <br>
+                <br>
+                <br>
+            </th>
+        </tr>
+
+        <tr>
+            {% for pkk in buatakta.get_akta3 %}
+            <th align="center">
+                <font size="6">{{pkk.nik_karyawan.nama_karyawan}}</font>
+            </th>
+            {% endfor %}
+        </tr>
+
+    </table>
+    <br><br>
+    <table>
+        <tr>
+            <th align="center">
+                <font size="6">Pejabat Pembuat Akta Tanah </font>
+                <br>
+                <br>
+                <br>
+                <br>
+            </th>
+        </tr>
+        <tr>
+            <th align="center">
+                <font size="6">YOAN BUDIYANTO, S.H.,M.Kn.</font>
+            </th>
+        </tr>
+
+    </table>
+
+
+</body>
+
+</html>
